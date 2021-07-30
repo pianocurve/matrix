@@ -75,7 +75,6 @@ def main():
           celHeight=height/row
           x_tmp = int(x_s/celWidth)
           y_tmp = int(y_s/celHeight)
-          #print (xx,yy)
           rect= pg.draw.rect(win,(ALTCOLOR),( x_tmp * celWidth + 1, y_tmp * celHeight + 1, celWidth -1 ,celHeight -1),0)
           pg.display.update(rect)
 
@@ -91,17 +90,22 @@ def main():
       if event.type == pg.MOUSEMOTION:
         buttons= pg.mouse.get_pressed()
         if buttons[0]: 
-          x_s, y_s= event.pos
+          x_e, y_e= event.pos
           celWidth=width/col
           celHeight=height/row
-          xx = int(x_s/celWidth)
-          yy = int(y_s/celHeight)
+          xx = int(x_e/celWidth)
+          yy = int(y_e/celHeight)
+          print(xx,yy,x_tmp,y_tmp)
           if x_tmp != xx or y_tmp != yy:
-            x_tmp=xx
-            y_tmp=yy
-            rect= pg.draw.rect(win,(ALTCOLOR),( x_tmp * celWidth + 1, y_tmp * celHeight + 1, celWidth -1 ,celHeight -1),0)
+            print("x")
+            rect= pg.draw.rect(win,(ALTCOLOR),( x_tmp * celWidth + 1, y_tmp * celHeight + 1,celWidth * (xx-x_tmp+1) ,celHeight*(yy-y_tmp+1)),1)
+            
             pg.display.update(rect)
-   
+
+            # x_tmp=xx
+            # y_tmp=yy
+            # rect= pg.draw.rect(win,(ALTCOLOR),( x_tmp * celWidth + 1, y_tmp * celHeight + 1, celWidth -1 ,celHeight -1),0)
+            # pg.display.update(rect)   
         
       if event.type == pg.VIDEORESIZE:
         width, height = event.size
